@@ -1,3 +1,4 @@
-Python package requirements.
-
-This file is part of the PhonePe Pulse Analytics project.
+streamlit>=1.36,<2
+pandas>=2.0
+numpy>=1.26
+plotly>=5.20
