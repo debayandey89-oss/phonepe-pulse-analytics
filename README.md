@@ -2,10 +2,12 @@
 
 An interactive Streamlit dashboard built using **only the six CSV files supplied for this project**. The supplied data covers 2018–2022. No outside dataset or API is used.
 
+> **Dataset upload still required:** The repository currently contains the dashboard and documentation. The six CSVs are in the downloadable project ZIP but have not yet been committed to this GitHub repository. Before running the app from this repository, follow [GITHUB_UPLOAD_GUIDE.md](GITHUB_UPLOAD_GUIDE.md) to copy the supplied project files and commit them.
+
 ## Run locally on macOS
 
-1. Download this repository (Code → Download ZIP) and extract it.
-2. Open the extracted folder.
+1. Complete the dataset upload described above (or use the complete project ZIP locally).
+2. Open the project folder.
 3. Double-click `START_DASHBOARD.command`.
 4. Keep the Terminal window open while the dashboard runs. On first launch it installs the free Python dependencies.
 5. Visit http://localhost:8501 if the browser does not open automatically.
