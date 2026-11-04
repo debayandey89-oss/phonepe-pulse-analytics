@@ -1,3 +1,17 @@
-Validation checks and reconciliation results.
-
-This file is part of the PhonePe Pulse Analytics project.
+{
+  "integrity_checks": {
+    "top_user": {"rows": 5920, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
+    "top_transaction": {"rows": 5920, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
+    "map_user": {"rows": 14640, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
+    "map_transaction": {"rows": 14636, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
+    "aggregated_transaction": {"rows": 3594, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
+    "aggregated_user": {"rows": 6732, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
+    "reconciliation": {
+      "matched_state_quarters": 720,
+      "count_exact_match_pct": 100.0,
+      "amount_max_abs_relative_difference": 5.888114068352405e-14
+    }
+  },
+  "app_python_syntax": "PASS",
+  "data_source_policy": "Only six user-uploaded CSVs; no external dataset or web data"
+}
