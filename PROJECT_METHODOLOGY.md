@@ -1,34 +1,25 @@
 # Project Methodology
 
-## Objective
-Explore the six supplied PhonePe Pulse CSV files to analyse transaction value, transaction count, registered-user distribution, device-brand composition and state/district patterns.
+## Objective and source boundary
+Explore the six supplied PhonePe Pulse CSV files only. No external datasets, APIs or enrichment are used.
 
-## Source boundary
-Only these files are used: aggregated_transaction, aggregated_user, map_transaction, map_user, top_transaction and top_user. No outside data is fetched or joined.
+## Consolidation
+Append the six CSVs vertically into data/processed/phonepe_pulse_master.csv. This is a union/append, not a side-by-side join. The master contains 51,442 rows and 13 standardised columns. source_dataset identifies the original source; source_row_id preserves the export row identifier. Non-applicable dimensions and measures remain blank.
 
-## Preparation
-1. Retain an untouched copy of each source CSV in `data/source/`.
-2. Remove export index columns named `Unnamed: ...`.
-3. Standardise state and district labels for consistent display.
-4. Preserve all supplied measures and dimensions.
-5. Store normalised copies in `data/processed/`.
+## Source grains
+- aggregated_transaction: state × year × quarter × transaction type
+- aggregated_user: state × year × quarter × device brand
+- map_transaction: state × year × quarter × district
+- map_user: state × year × quarter × district
+- top_transaction: state × year × quarter × district ranking extract
+- top_user: state × year × quarter × district ranking extract
 
-## Data grains
-- Aggregated transactions: state × year × quarter × transaction type.
-- Aggregated users: state × year × quarter × device brand.
-- Map transactions: state × year × quarter × district.
-- Map users: state × year × quarter × district.
-- Top transactions: state × year × quarter × district ranking extract.
-- Top users: state × year × quarter × district ranking extract.
-
-## KPI definitions
-- Transaction value: sum of `amount` for selected aggregated transaction records.
-- Transaction count: sum of `trans_counts` for selected aggregated transaction records.
-- Average transaction value: transaction value divided by transaction count.
-- Registered users: sum of district `registered_user_counts` in the latest selected year-quarter snapshot.
-- Device users: sum of `user_counts` in the selected aggregated-user brand data; interpret according to the supplied source measure.
-- YoY: current quarter divided by the same quarter in the prior year, minus one.
-- QoQ: current quarter divided by the immediately preceding quarter, minus one.
+## Dashboard safeguards
+- Transaction KPIs and category trends use aggregated_transaction.
+- District transaction analysis uses map_transaction.
+- Registered-user snapshots use map_user at the latest selected period.
+- Device analysis uses aggregated_user.
+- Top-list extracts are rankings only; never add them to map or aggregate totals.
 
 ## Limitations
-The supplied CSVs have state and district labels but no coordinates or polygon geometries. A true boundary map would require external geography data, which is intentionally excluded. The dashboard therefore uses an interactive hierarchical treemap. Data is limited to 2018–2022 as supplied. The data does not report PhonePe's corporate revenue.
+Transaction value is payment value, not PhonePe corporate revenue. Registered-user counts are snapshots. Supplied data covers 2018–2022. No coordinates or boundary geometries are supplied, so the geographic visual is a treemap, not a choropleth.
