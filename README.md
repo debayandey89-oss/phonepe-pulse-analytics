@@ -1,50 +1,35 @@
 # PhonePe Pulse Analytics Dashboard
 
-An interactive Streamlit dashboard built using **only the six CSV files supplied for this project**. The supplied data covers 2018–2022. No outside dataset or API is used.
+A Streamlit dashboard built using only the six supplied PhonePe Pulse CSV files (2018–2022). The files are vertically appended into one consolidated master CSV; no external data, APIs or enrichment are used.
 
-> **Dataset upload still required:** The repository currently contains the dashboard and documentation. The six CSVs are in the downloadable project ZIP but have not yet been committed to this GitHub repository. Before running the app from this repository, follow [GITHUB_UPLOAD_GUIDE.md](GITHUB_UPLOAD_GUIDE.md) to copy the supplied project files and commit them.
+## Run on macOS
+1. Download and extract the project ZIP.
+2. Open the project folder and double-click START_DASHBOARD.command.
+3. Keep Terminal open while the dashboard runs.
+4. If the browser does not open, visit http://localhost:8501.
+5. Stop with Control + C in Terminal.
 
-## Run locally on macOS
+## Data architecture
+The dashboard reads data/processed/phonepe_pulse_master.csv: 51,442 rows, 13 standardised columns and six source sections. This is an append/union, not a side-by-side join. source_dataset identifies the original source of every row. Blank dimensions and measures are intentional when not applicable.
 
-1. Complete the dataset upload described above (or use the complete project ZIP locally).
-2. Open the project folder.
-3. Double-click `START_DASHBOARD.command`.
-4. Keep the Terminal window open while the dashboard runs. On first launch it installs the free Python dependencies.
-5. Visit http://localhost:8501 if the browser does not open automatically.
-6. Press Control+C in Terminal to stop the dashboard.
+The six untouched source CSVs remain in data/source/ for traceability.
 
-If macOS blocks the launcher, Control-click it, choose Open, and confirm. Python 3 is required; install it from https://www.python.org/downloads/macos/ if needed.
-
-## Dashboard features
-
+## Dashboard
 - Executive overview and transaction KPIs
-- Quarterly transaction trends and transaction-category mix
-- Year-on-year and quarter-on-quarter comparisons
-- State and district rankings
+- Quarterly transaction trends and category mix
+- State and district transaction analysis
 - Registered-user and device-brand analysis
-- Interactive state/district treemap
+- Top-user and top-transaction rankings
 - Data-quality and methodology notes
+- Download of the consolidated master CSV
 
-## Data safeguards
+## Interpretation safeguards
+- Transaction value is not PhonePe corporate revenue.
+- Aggregated and district transaction datasets have different grains; never add them together.
+- Registered-user counts are snapshots, not cumulative quarterly flows.
+- Top-list extracts are rankings, not additive totals.
+- Data covers 2018–2022 only.
+- No coordinates or boundary polygons are supplied; the dashboard uses a treemap, not a choropleth.
 
-- Only the six supplied CSVs are used; no external dataset, API, or geography enrichment is used.
-- Transaction value is not PhonePe's corporate revenue.
-- Aggregated transaction and district map data have different grains and must not be added together.
-- Registered-user counts are snapshots, not quarterly flows.
-- Top-user and top-transaction files are ranking extracts, not additional totals.
-- The supplied data spans 2018–2022 only.
-- The CSVs contain names and measures, not coordinates or boundary polygons. A true choropleth would require external geography data, so this project uses a treemap.
-
-## Project structure
-
-- `app.py` — Streamlit dashboard
-- `START_DASHBOARD.command` — macOS launcher
-- `requirements.txt` — Python dependencies
-- `data/source/` — original supplied CSVs
-- `data/processed/` — cleaned copies used by the dashboard
-- `PROJECT_METHODOLOGY.md` — methods and KPI definitions
-- `DATA_DICTIONARY.md` — schemas and grains
-- `DATA_VALIDATION_REPORT.json` — validation summary
-- `INSIGHTS_TEMPLATE.md` — evidence-led findings template
-
-See the methodology and validation report before interpreting results.
+## Key files
+app.py; data/processed/phonepe_pulse_master.csv; data/source/; DATA_DICTIONARY.md; PROJECT_METHODOLOGY.md; DATA_VALIDATION_REPORT.json; START_DASHBOARD.command.
