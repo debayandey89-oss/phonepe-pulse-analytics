@@ -1,35 +1,49 @@
 # PhonePe Pulse Analytics Dashboard
 
-A Streamlit dashboard built using only the six supplied PhonePe Pulse CSV files (2018–2022). The files are vertically appended into one consolidated master CSV; no external data, APIs or enrichment are used.
+A Streamlit dashboard built using **only the six supplied PhonePe Pulse CSV files** (2018–2022). The six files are appended into one consolidated master CSV; no outside data, APIs or enrichment are used.
 
-## Run on macOS
+## Run it on a Mac
+
 1. Download and extract the project ZIP.
-2. Open the project folder and double-click START_DASHBOARD.command.
-3. Keep Terminal open while the dashboard runs.
-4. If the browser does not open, visit http://localhost:8501.
-5. Stop with Control + C in Terminal.
+2. Open the `phonepe_pulse_project` folder.
+3. Double-click `START_DASHBOARD.command`.
+4. The first run may take a few minutes while free Python packages install. Keep Terminal open.
+5. If the browser does not open, visit http://localhost:8501.
+6. Stop the dashboard with Control + C in Terminal.
+
+If macOS blocks the command file, Control-click it, choose Open, and confirm. If Python 3 is missing, install it from https://www.python.org/downloads/macos/.
 
 ## Data architecture
-The dashboard reads data/processed/phonepe_pulse_master.csv: 51,442 rows, 13 standardised columns and six source sections. This is an append/union, not a side-by-side join. source_dataset identifies the original source of every row. Blank dimensions and measures are intentional when not applicable.
 
-The six untouched source CSVs remain in data/source/ for traceability.
+`data/processed/phonepe_pulse_master.csv` is the single data file used by the dashboard. It contains 51,442 rows appended from six source files, with a common schema and a `source_dataset` column identifying each row's origin.
 
-## Dashboard
+This is a vertical append/union, **not a side-by-side join**. Blank fields are intentional where a measure or dimension does not apply to a particular source. The six untouched originals are retained in `data/source/`.
+
+## Dashboard contents
 - Executive overview and transaction KPIs
-- Quarterly transaction trends and category mix
+- Quarterly transaction trends, category mix and growth
 - State and district transaction analysis
 - Registered-user and device-brand analysis
 - Top-user and top-transaction rankings
-- Data-quality and methodology notes
+- Data quality, source inventory and methodology
 - Download of the consolidated master CSV
 
 ## Interpretation safeguards
-- Transaction value is not PhonePe corporate revenue.
-- Aggregated and district transaction datasets have different grains; never add them together.
-- Registered-user counts are snapshots, not cumulative quarterly flows.
-- Top-list extracts are rankings, not additive totals.
-- Data covers 2018–2022 only.
-- No coordinates or boundary polygons are supplied; the dashboard uses a treemap, not a choropleth.
+- Transaction value is not PhonePe's corporate revenue.
+- Aggregated and district map transaction datasets are different grains; do not add them together.
+- Registered-user counts are snapshots, not flows; do not sum across quarters as cumulative users.
+- Top-user and top-transaction files are ranking extracts, not additional totals to add to map data.
+- The supplied data spans 2018–2022 only.
+- The CSVs contain no coordinates or boundary polygons, so the dashboard uses a treemap rather than a true choropleth.
 
-## Key files
-app.py; data/processed/phonepe_pulse_master.csv; data/source/; DATA_DICTIONARY.md; PROJECT_METHODOLOGY.md; DATA_VALIDATION_REPORT.json; START_DASHBOARD.command.
+## Project structure
+- `app.py` — dashboard
+- `data/processed/phonepe_pulse_master.csv` — consolidated master used by dashboard
+- `data/source/` — six original CSVs
+- `START_DASHBOARD.command` — Mac launcher
+- `requirements.txt` — dependencies
+- `DATA_DICTIONARY.md` — master schema and source grains
+- `PROJECT_METHODOLOGY.md` — consolidation and analytical rules
+- `DATA_VALIDATION_REPORT.json` — validation checks
+- `INSIGHTS_TEMPLATE.md` — findings template
+- `GITHUB_UPLOAD_GUIDE.md` — publishing guide

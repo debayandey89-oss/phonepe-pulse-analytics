@@ -1,14 +1,16 @@
-# Update the GitHub repository
+# Publish the revised project on GitHub
 
-The revised project ZIP includes the consolidated master CSV, dashboard and documentation.
+## Update your existing repository with GitHub Desktop
 
-1. Download and extract the ZIP.
-2. Open GitHub Desktop and select phonepe-pulse-analytics.
-3. Choose Repository → Show in Finder.
-4. Copy all contents of the extracted phonepe_pulse_project_revised folder into the repository folder, replacing existing files.
-5. Ensure data/processed/phonepe_pulse_master.csv is included and the six originals remain in data/source/.
-6. Review changes, commit with message "Consolidate six PhonePe datasets and update dashboard", then Push origin.
+1. Open GitHub Desktop and select `phonepe-pulse-analytics`.
+2. Choose **Repository → Show in Finder**.
+3. Copy the contents of this extracted `phonepe_pulse_project_revised` folder into the repository folder, replacing files when asked.
+4. Confirm that `data/processed/phonepe_pulse_master.csv` is included and all six original files remain in `data/source/`.
+5. Review the changed files in GitHub Desktop.
+6. Commit with the message `Consolidate six PhonePe datasets and update dashboard`.
+7. Click **Push origin**.
 
-Before keeping the repository public, confirm that you have permission to redistribute the supplied CSVs. Public repositories make committed data downloadable by anyone.
+Before making the repository public, confirm that you have permission to redistribute the supplied CSV data. A public repository makes all committed data downloadable by anyone.
 
-To run after cloning, double-click START_DASHBOARD.command. The first run needs internet access to install free Python packages.
+## Run after cloning
+Open the repository folder and double-click `START_DASHBOARD.command`. The first run needs an internet connection to install free Python packages.

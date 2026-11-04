@@ -1,17 +1,38 @@
 {
-  "integrity_checks": {
-    "top_user": {"rows": 5920, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
-    "top_transaction": {"rows": 5920, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
-    "map_user": {"rows": 14640, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
-    "map_transaction": {"rows": 14636, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
-    "aggregated_transaction": {"rows": 3594, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
-    "aggregated_user": {"rows": 6732, "duplicate_rows": 0, "missing_cells": 0, "year_min": 2018, "year_max": 2022, "states": 36},
-    "reconciliation": {
-      "matched_state_quarters": 720,
-      "count_exact_match_pct": 100.0,
-      "amount_max_abs_relative_difference": 5.888114068352405e-14
-    }
+  "project": "PhonePe Pulse Analytics",
+  "source_scope": "Exactly the six supplied CSV files; no external data or APIs",
+  "master_file": "data/processed/phonepe_pulse_master.csv",
+  "master_rows": 51442,
+  "master_columns": [
+    "source_dataset",
+    "source_row_id",
+    "state",
+    "year",
+    "quarter",
+    "district",
+    "transaction_type",
+    "device_brand",
+    "transaction_count",
+    "transaction_amount",
+    "registered_user_count",
+    "device_user_count",
+    "percentage"
+  ],
+  "source_row_counts": {
+    "aggregated_transaction": 3594,
+    "aggregated_user": 6732,
+    "map_transaction": 14636,
+    "map_user": 14640,
+    "top_transaction": 5920,
+    "top_user": 5920
   },
-  "app_python_syntax": "PASS",
-  "data_source_policy": "Only six user-uploaded CSVs; no external dataset or web data"
+  "total_source_rows": 51442,
+  "checks": {
+    "all_six_sources_present": true,
+    "all_source_rows_preserved": true,
+    "no_source_dataset_nulls": true,
+    "source_rows_match_expected": true
+  },
+  "schema_note": "The master is an append/union, not a side-by-side join. Non-applicable dimensions and measures are blank by design.",
+  "interpretation_note": "The dashboard separates source sections by source_dataset and never adds overlapping grains or ranking extracts to totals."
 }

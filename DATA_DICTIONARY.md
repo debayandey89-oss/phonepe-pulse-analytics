@@ -1,33 +1,35 @@
 # Data Dictionary
 
-## Consolidated master
-data/processed/phonepe_pulse_master.csv contains 51,442 rows appended from the six source CSVs. It is a vertical union, not a side-by-side join. Every row has source_dataset and source_row_id.
+## Consolidated master file
+
+`data/processed/phonepe_pulse_master.csv` contains **51,442 rows** appended from the six supplied CSVs. It is a vertical union (append), not a side-by-side join. Every row carries `source_dataset`, which identifies its original source and preserves its analytical grain.
 
 | Column | Meaning |
 |---|---|
-| source_dataset | Original source identifier |
-| source_row_id | Original source export row identifier |
-| state | State / union territory |
+| source_dataset | One of the six original dataset identifiers |
+| source_row_id | Original export index / row identifier from the source |
+| state | State or union territory |
 | year, quarter | Reporting period |
-| district | District, when supplied |
-| transaction_type | Transaction category, when supplied |
-| device_brand | Device brand, when supplied |
-| transaction_count | Transaction count, when supplied |
-| transaction_amount | Transaction amount, when supplied |
-| registered_user_count | Registered-user count, when supplied |
-| device_user_count | Device-user count, when supplied |
-| percentage | Brand percentage, when supplied |
+| district | District, where supplied |
+| transaction_type | Transaction category, where supplied |
+| device_brand | Device brand, where supplied |
+| transaction_count | Transaction count, where supplied |
+| transaction_amount | Transaction amount, where supplied |
+| registered_user_count | Registered-user count, where supplied |
+| device_user_count | Device-user count, where supplied |
+| percentage | Brand percentage, where supplied |
 
-Blank values are intentional where a field does not apply.
+Blank values are intentional when a dimension or measure does not apply to a source dataset.
 
-## Source grains and row counts
-| source_dataset | Rows | Grain |
-|---|---:|---|
-| aggregated_transaction | 3,594 | state × year × quarter × transaction type |
-| aggregated_user | 6,732 | state × year × quarter × device brand |
-| map_transaction | 14,636 | state × year × quarter × district |
-| map_user | 14,640 | state × year × quarter × district |
-| top_transaction | 5,920 | state × year × quarter × district ranking extract |
-| top_user | 5,920 | state × year × quarter × district ranking extract |
+## Source sections and grains
 
-Original source CSVs are retained in data/source/. Dashboard analyses first filter by source_dataset to preserve each source's grain.
+| source_dataset | Rows | Dimensions | Measures |
+|---|---:|---|---|
+| aggregated_transaction | 3,594 | state, year, quarter, transaction_type | transaction_count, transaction_amount |
+| aggregated_user | 6,732 | state, year, quarter, device_brand | device_user_count, percentage |
+| map_transaction | 14,636 | state, year, quarter, district | transaction_count, transaction_amount |
+| map_user | 14,640 | state, year, quarter, district | registered_user_count |
+| top_transaction | 5,920 | state, year, quarter, district | transaction_count, transaction_amount |
+| top_user | 5,920 | state, year, quarter, district | registered_user_count |
+
+The six untouched source files remain in `data/source/` for traceability. The dashboard loads the consolidated master and filters by `source_dataset` before performing analysis.
